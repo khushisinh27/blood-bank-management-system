@@ -1,0 +1,179 @@
+{% extends 'blood/adminbase.html' %}
+{% block content %}
+{% load widget_tweaks %}
+<style>
+  .blood h2 {
+    font-size: 2rem;
+    color: #d9534f;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .blood i {
+    margin-left: 10px;
+    color: #dc3545;
+    animation: pulse 1.5s infinite;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); color: #c82333; }
+    100% { transform: scale(1); }
+  }
+
+  .card {
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 15px;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+  }
+
+  .card-body div:last-child {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #444;
+  }
+
+  .xyz form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .form-control {
+    min-width: 200px;
+  }
+
+  .xyz {
+    display: table;
+    margin: 0 auto;
+  }
+</style>
+
+<br><br>
+<div class="container">
+  <h3 class="text-center mb-4">Current Blood Stock</h3>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="card bg-light">
+        <div class="card-body">
+          <div class="blood">
+            <h2>A+ <i class="fas fa-tint"></i></h2>
+          </div><br><br>
+          <div>{{ A1.unit }}</div>                            
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="card bg-light">
+        <div class="card-body">
+          <div class="blood">
+            <h2>B+ <i class="fas fa-tint"></i></h2>
+          </div><br><br>
+          <div>{{ B1.unit }}</div>                            
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="card bg-light">
+        <div class="card-body">
+          <div class="blood">
+            <h2>O+ <i class="fas fa-tint"></i></h2>
+          </div><br><br>
+          <div>{{ O1.unit }}</div>                            
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="card bg-light">
+        <div class="card-body">
+          <div class="blood">
+            <h2>AB+ <i class="fas fa-tint"></i></h2>
+          </div><br><br>
+          <div>{{ AB1.unit }}</div>                            
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-sm-3">
+      <div class="card bg-light">
+        <div class="card-body">
+          <div class="blood">
+            <h2>A- <i class="fas fa-tint"></i></h2>
+          </div><br><br>
+          <div>{{ A2.unit }}</div>                            
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="card bg-light">
+        <div class="card-body">
+          <div class="blood">
+            <h2>B- <i class="fas fa-tint"></i></h2>
+          </div><br><br>
+          <div>{{ B2.unit }}</div>                            
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="card bg-light">
+        <div class="card-body">
+          <div class="blood">
+            <h2>O- <i class="fas fa-tint"></i></h2>
+          </div><br><br>
+          <div>{{ O2.unit }}</div>                            
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="card bg-light">
+        <div class="card-body">
+          <div class="blood">
+            <h2>AB- <i class="fas fa-tint"></i></h2>
+          </div><br><br>
+          <div>{{ AB2.unit }}</div>                            
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+  <br>
+  <h3 class="text-center">Update Blood Unit</h3><br>
+
+  <div class="xyz">
+    <form method="POST" class="form-inline">
+      {% csrf_token %}
+      <div class="form-group mx-sm-3 mb-2">
+        <select name="bloodgroup" class="form-control">
+          <option disabled selected>Choose Blood Group</option>
+          <option>O+</option>
+          <option>O-</option>
+          <option>A+</option>
+          <option>A-</option>
+          <option>B+</option>
+          <option>B-</option>
+          <option>AB+</option>
+          <option>AB-</option>
+        </select>
+      </div>
+      <div class="form-group mx-sm-3 mb-2">
+        <input type="number" class="form-control" name="unit" placeholder="Unit">
+      </div>
+      <button type="submit" class="btn btn-danger mb-2">
+        <i class="fas fa-sync-alt"></i> Update
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,60 @@
+{% extends 'blood/adminbase.html' %}
+{% block content %}
+{% load widget_tweaks %}
+{% load static %}
+<br><br>
+
+<!-- Custom Styling -->
+<style>
+    .profile-pic {
+        height: 45px;
+        width: 45px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #ddd;
+    }
+    .btn a {
+        color: white;
+        text-decoration: none;
+    }
+    .btn a:hover {
+        color: white;
+    }
+</style>
+
+<div class="container">
+    <h4 class="text-center text-danger mb-4">Patient Details</h4>
+
+    <table class="table table-bordered table-striped table-hover shadow-sm">
+        <thead class="bg-info text-white text-center">
+            <tr>
+                <th>Name</th>
+                <th>Profile</th>
+                <th>Blood Group</th>
+                <th>Age</th>
+                <th>Disease</th>
+                <th>Mobile</th>
+                <th class="text-right">Action</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            {% for t in patients %}
+            <tr>
+                <td>{{ t.get_name }}</td>
+                <td><img src="{% static t.profile_pic.url %}" alt="Profile Pic" class="profile-pic"></td>
+                <td>{{ t.bloodgroup }}</td>
+                <td>{{ t.age }}</td>
+                <td>{{ t.disease }}</td>
+                <td>{{ t.mobile }}</td>
+                <td class="text-right">
+                    <a href="{% url 'update-patient' t.id %}" class="btn btn-success btn-sm rounded-pill">Edit</a>
+                    <a href="{% url 'delete-patient' t.id %}" class="btn btn-danger btn-sm rounded-pill">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}
+

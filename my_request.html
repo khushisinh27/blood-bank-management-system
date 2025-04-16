@@ -1,0 +1,113 @@
+{% extends 'patient/patientbase.html' %}
+{% block content %}
+{% load widget_tweaks %}
+{% load static %}
+
+<head>
+  <style>
+    .label {
+      padding: 6px 12px;
+      border-radius: 15px;
+      font-weight: 600;
+      color: white;
+      font-size: 14px;
+    }
+
+    .success {
+      background-color: #28a745;
+    }
+
+    .info {
+      background-color: #007bff;
+    }
+
+    .warning {
+      background-color: #ffc107;
+      color: #000;
+    }
+
+    .danger {
+      background-color: #dc3545;
+    }
+
+    .other {
+      background-color: #e7e7e7;
+      color: #000;
+    }
+
+    .table-container {
+      animation: fadeInUp 0.6s ease-in-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .table thead {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    h4 {
+      font-weight: bold;
+      color: #cc0000;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+
+<br><br>
+<div class="container table-container">
+  <h4 class="text-center">My Blood Request</h4><br>
+  <div class="table-responsive">
+    <table class="table table-light table-hover table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Patient Name</th>
+          <th>Patient Age</th>
+          <th>Reason</th>
+          <th>Blood Group</th>
+          <th>Unit</th>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for t in blood_request %}
+        <tr>
+          <td>{{ t.patient_name }}</td>
+          <td>{{ t.patient_age }}</td>
+          <td>{{ t.reason }}</td>
+          <td>{{ t.bloodgroup }}</td>
+          <td>{{ t.unit }}</td>
+          <td>{{ t.date }}</td>
+          <td>
+            {% if t.status == 'Approved' %}
+              <span class="label success">Approved</span>
+            {% elif t.status == 'Rejected' %}
+              <span class="label danger">Rejected</span>
+            {% else %}
+              <span class="label info">Pending</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock content %}
+

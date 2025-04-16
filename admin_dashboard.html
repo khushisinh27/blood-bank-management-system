@@ -1,0 +1,184 @@
+{% extends 'blood/adminbase.html' %}
+{% block content %}
+<br><br>
+
+<!-- Styling -->
+<style>
+    .blood h2 {
+        color: #dc3545;
+        font-weight: bold;
+        text-align: center;
+    }
+    .card {
+        transition: transform 0.3s ease;
+        border-radius: 1rem;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .card:hover {
+        transform: scale(1.03);
+    }
+    .card-body div:last-child {
+        text-align: center;
+        font-size: 1.25rem;
+        color: #333;
+    }
+    .xyz {
+        color: #dc3545;
+    }
+</style>
+
+<!-- Animate.css (optional) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+<div class="container">
+    <h3 class="text-center my-4 text-danger">Blood Stock Overview</h3>
+
+    <!-- First row -->
+    <div class="row g-4">
+        <div class="col-sm-3">
+            <div class="card bg-light">
+                <div class="card-body text-center">
+                    <div class="blood">
+                        <h2>A+ <i class="fas fa-tint animate__animated animate__pulse animate__infinite"></i></h2>
+                    </div><br>
+                    <div>{{ A1.unit }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card bg-light">
+                <div class="card-body text-center">
+                    <div class="blood">
+                        <h2>B+ <i class="fas fa-tint animate__animated animate__pulse animate__infinite"></i></h2>
+                    </div><br>
+                    <div>{{ B1.unit }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card bg-light">
+                <div class="card-body text-center">
+                    <div class="blood">
+                        <h2>O+ <i class="fas fa-tint animate__animated animate__pulse animate__infinite"></i></h2>
+                    </div><br>
+                    <div>{{ O1.unit }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card bg-light">
+                <div class="card-body text-center">
+                    <div class="blood">
+                        <h2>AB+ <i class="fas fa-tint animate__animated animate__pulse animate__infinite"></i></h2>
+                    </div><br>
+                    <div>{{ AB1.unit }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Second row -->
+    <div class="row g-4 mt-2">
+        <div class="col-sm-3">
+            <div class="card bg-light">
+                <div class="card-body text-center">
+                    <div class="blood">
+                        <h2>A- <i class="fas fa-tint animate__animated animate__pulse animate__infinite"></i></h2>
+                    </div><br>
+                    <div>{{ A2.unit }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card bg-light">
+                <div class="card-body text-center">
+                    <div class="blood">
+                        <h2>B- <i class="fas fa-tint animate__animated animate__pulse animate__infinite"></i></h2>
+                    </div><br>
+                    <div>{{ B2.unit }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card bg-light">
+                <div class="card-body text-center">
+                    <div class="blood">
+                        <h2>O- <i class="fas fa-tint animate__animated animate__pulse animate__infinite"></i></h2>
+                    </div><br>
+                    <div>{{ O2.unit }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card bg-light">
+                <div class="card-body text-center">
+                    <div class="blood">
+                        <h2>AB- <i class="fas fa-tint animate__animated animate__pulse animate__infinite"></i></h2>
+                    </div><br>
+                    <div>{{ AB2.unit }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-4">
+
+    <!-- Stats row -->
+    <h3 class="text-center my-4 text-danger">System Summary</h3>
+    <div class="row g-4">
+        <div class="col-sm-3">
+            <div class="card bg-light">
+                <div class="card-body text-center">
+                    <div class="blood">
+                        <i class="fas fa-users fa-2x text-primary"></i>
+                    </div><br>
+                    <div>
+                        Total Donors <br>
+                        {{ totaldonors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card bg-light">
+                <div class="card-body text-center">
+                    <div class="blood">
+                        <i class="fas fa-spinner fa-2x text-warning"></i>
+                    </div><br>
+                    <div>
+                        Total Requests <br>
+                        {{ totalrequest }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card bg-light">
+                <div class="card-body text-center">
+                    <div class="blood">
+                        <i class="far fa-check-circle fa-2x text-success"></i>
+                    </div><br>
+                    <div>
+                        Approved Requests <br>
+                        {{ totalapprovedrequest }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card bg-light">
+                <div class="card-body text-center">
+                    <div class="blood">
+                        <i class="fas fa-tint fa-2x text-danger"></i>
+                    </div><br>
+                    <div>
+                        Total Blood Unit (in ml) <br>
+                        {{ totalbloodunit }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+

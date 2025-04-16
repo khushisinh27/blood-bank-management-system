@@ -1,0 +1,121 @@
+{% extends 'donor/donorbase.html' %}
+{% block content %}
+{% load widget_tweaks %}
+{% load static %}
+
+<!-- Fonts and Custom CSS -->
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet" media="all">
+    <style>
+        .title {
+            text-align: center;
+            font-weight: bold;
+            color: #b30000;
+            animation: fadeInDown 1s ease-in-out;
+        }
+        .card {
+            animation: fadeInUp 1s ease-in-out;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-radius: 20px;
+        }
+        .btn-danger {
+            background: linear-gradient(to right, #ff4e50, #f03c3c);
+            border: none;
+            transition: 0.3s ease-in-out;
+        }
+        .btn-danger:hover {
+            transform: scale(1.05);
+            background: #b30000;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<!-- Form Wrapper -->
+<div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+    <div class="wrapper wrapper--w790">
+        <div class="card card-5">
+            <div class="card-heading">
+                <h2 class="title">Donate Blood</h2>
+            </div>
+            <div class="card-body">
+                <form method="POST" autocomplete="off" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <!-- Blood Group -->
+                    <div class="form-row">
+                        <div class="name">Blood Group</div>
+                        <div class="value">
+                            <div class="input-group">
+                                <div class="rs-select2 js-select-simple select--no-search">
+                                    <select name="bloodgroup" required>
+                                        <option disabled selected>Choose option</option>
+                                        <option>O+</option>
+                                        <option>O-</option>
+                                        <option>A+</option>
+                                        <option>A-</option>
+                                        <option>B+</option>
+                                        <option>B-</option>
+                                        <option>AB+</option>
+                                        <option>AB-</option>
+                                    </select>
+                                    <div class="select-dropdown"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Unit -->
+                    <div class="form-row">
+                        <div class="name">Unit (in ml)</div>
+                        <div class="value">
+                            <div class="input-group">
+                                {% render_field donation_form.unit|attr:'required:true' class="input--style-5" %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Disease -->
+                    <div class="form-row">
+                        <div class="name">Disease (if any)</div>
+                        <div class="value">
+                            <div class="input-group">
+                                {% render_field donation_form.disease|attr:'required:true' class="input--style-5" %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Age -->
+                    <div class="form-row">
+                        <div class="name">Age</div>
+                        <div class="value">
+                            <div class="input-group">
+                                {% render_field donation_form.age|attr:'required:true' class="input--style-5" %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-row">
+                        <div class="value">
+                            <button class="btn btn--radius-2 btn-danger btn-block" type="submit">DONATE</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

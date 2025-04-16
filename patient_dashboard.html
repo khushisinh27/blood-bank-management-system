@@ -1,0 +1,122 @@
+{% extends 'patient/patientbase.html' %}
+{% block content %}
+<head>
+  <style>
+    .card {
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-body {
+      text-align: center;
+      padding: 30px;
+    }
+
+    .blood i {
+      font-size: 3rem;
+      color: #cc0000;
+      animation: popIn 0.8s ease;
+    }
+
+    .card-body div:last-child {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-top: 10px;
+      color: #444;
+    }
+
+    .card-body div:last-child span {
+      display: block;
+      font-size: 1.5rem;
+      color: #000;
+      margin-top: 6px;
+    }
+
+    @keyframes popIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+      color: #cc0000;
+      margin-bottom: 40px;
+    }
+  </style>
+</head>
+
+<br><br>
+<div class="container">
+  <div class="section-title">Your Request Summary</div>
+  <div class="row g-4">
+
+    <div class="col-sm-6 col-md-3">
+      <div class="card bg-light">
+        <div class="card-body">
+          <div class="blood">
+            <i class="fas fa-sync-alt"></i>
+          </div>
+          <div>
+            Request Made <span>{{ requestmade }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+      <div class="card bg-light">
+        <div class="card-body">
+          <div class="blood">
+            <i class="fas fa-sync"></i>
+          </div>
+          <div>
+            Pending Request <span>{{ requestpending }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+      <div class="card bg-light">
+        <div class="card-body">
+          <div class="blood">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <div>
+            Approved Request <span>{{ requestapproved }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+      <div class="card bg-light">
+        <div class="card-body">
+          <div class="blood">
+            <i class="fas fa-times-circle"></i>
+          </div>
+          <div>
+            Rejected Request <span>{{ requestrejected }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock content %}
+

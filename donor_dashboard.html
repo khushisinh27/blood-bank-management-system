@@ -1,0 +1,98 @@
+{% extends 'donor/donorbase.html' %}
+{% block content %}
+{% load static %}
+<style>
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 20px;
+    background: #f8f9fa;
+  }
+
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .card .blood {
+    font-size: 40px;
+    color: #d9534f;
+    animation: popIn 0.5s ease-in-out;
+  }
+
+  .card-body div {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .card-body div:last-child {
+    font-size: 24px;
+    font-weight: bold;
+    color: #b30000;
+  }
+
+  @keyframes popIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+</style>
+
+<br><br>
+<div class="container">
+  <div class="row text-center">
+
+    <div class="col-sm-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="blood">
+            <i class="fas fa-sync-alt"></i>
+          </div>
+          <div>Request Made</div>
+          <div>{{ requestmade }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="blood">
+            <i class="fas fa-sync"></i>
+          </div>
+          <div>Pending Request</div>
+          <div>{{ requestpending }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="blood">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <div>Approved Request</div>
+          <div>{{ requestapproved }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="blood">
+            <i class="fas fa-times-circle"></i>
+          </div>
+          <div>Rejected Request</div>
+          <div>{{ requestrejected }}</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock content %}

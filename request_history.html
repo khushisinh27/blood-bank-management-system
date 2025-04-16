@@ -1,0 +1,102 @@
+{% extends 'donor/donorbase.html' %}
+{% block content %}
+{% load widget_tweaks %}
+{% load static %}
+
+<head>
+  <style>
+    .label {
+      color: white;
+      padding: 6px 12px;
+      border-radius: 5px;
+      font-weight: 500;
+      font-size: 14px;
+      display: inline-block;
+    }
+
+    .success { background-color: #4CAF50; } /* Green */
+    .info { background-color: #2196F3; }    /* Blue */
+    .warning { background-color: #FF9800; } /* Orange */
+    .danger { background-color: #f44336; }  /* Red */
+    .other { background-color: #e7e7e7; color: black; } /* Gray */
+
+    h4 {
+      font-weight: 700;
+      color: #dc3545;
+      text-transform: uppercase;
+    }
+
+    .table thead th {
+      color: white;
+      vertical-align: middle;
+      text-align: center;
+    }
+
+    .table td {
+      vertical-align: middle;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .container {
+      animation: fadeIn 0.7s ease-in;
+    }
+  </style>
+</head>
+
+<br><br>
+<div class="container">
+  <h4 class="text-center">My Blood Request</h4><br>
+  <div class="table-responsive">
+    <table class="table table-light table-hover table-bordered table-striped">
+      <thead class="bg-info">
+        <tr>
+          <th>Patient Name</th>
+          <th>Patient Age</th>
+          <th>Reason</th>
+          <th>Blood Group</th>
+          <th>Unit</th>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for t in blood_request %}
+        <tr>
+          <td>{{ t.patient_name }}</td>
+          <td>{{ t.patient_age }}</td>
+          <td>{{ t.reason }}</td>
+          <td>{{ t.bloodgroup }}</td>
+          <td>{{ t.unit }}</td>
+          <td>{{ t.date }}</td>
+          <td>
+            {% if t.status == 'Approved' %}
+              <span class="label success">Approved</span>
+            {% elif t.status == 'Rejected' %}
+              <span class="label danger">Rejected</span>
+            {% else %}
+              <span class="label info">Pending</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="7" class="text-center text-muted">No blood requests found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock content %}
+

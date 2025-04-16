@@ -1,0 +1,76 @@
+{% extends 'donor/donorbase.html' %}
+{% block content %}
+{% load widget_tweaks %}
+{% load static %}
+
+<head>
+  <style>
+    .label {
+      color: white;
+      padding: 6px 12px;
+      border-radius: 5px;
+      font-size: 14px;
+      display: inline-block;
+    }
+
+    .success { background-color: #4CAF50; }  /* Green */
+    .info    { background-color: #2196F3; }  /* Blue */
+    .warning { background-color: #ff9800; }  /* Orange */
+    .danger  { background-color: #f44336; }  /* Red */
+    .other   { background-color: #e7e7e7; color: black; } /* Gray */
+
+    .table th, .table td {
+      vertical-align: middle !important;
+      text-align: center;
+    }
+
+    .table-hover tbody tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    h4 {
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+
+<br><br>
+<div class="container">
+  <h4 class="text-center">My Donation History</h4><br>
+  <table class="table table-light table-hover table-bordered table-striped">
+    <thead class="bg-info text-white">
+      <tr>
+        <th scope="col">Donor Age</th>
+        <th scope="col">Disease (if any)</th>
+        <th scope="col">Blood Group</th>
+        <th scope="col">Unit</th>
+        <th scope="col">Date</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for t in donations %}
+      <tr>
+        <td>{{ t.age }}</td>
+        <td>{{ t.disease|default:"None" }}</td>
+        <td>{{ t.bloodgroup }}</td>
+        <td>{{ t.unit }}</td>
+        <td>{{ t.date }}</td>
+        <td>
+          {% if t.status == 'Approved' %}
+            <span class="label success">Approved</span>
+          {% elif t.status == 'Rejected' %}
+            <span class="label danger">Rejected</span>
+          {% else %}
+            <span class="label info">Pending</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock content %}
+
